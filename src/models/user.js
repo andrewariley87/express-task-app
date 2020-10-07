@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const { isEmail } = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const task = require('../models/task');
 const Task = require('../models/task');
 
 const userSchema = new mongoose.Schema({
@@ -48,6 +47,8 @@ const userSchema = new mongoose.Schema({
       required: true
     }
   }]
+}, {
+  timestamps: true
 });
 
 userSchema.virtual('tasks', {
