@@ -18,8 +18,10 @@ router.post('/tasks', auth, async(req, res) => {
 });
 
 router.get('/tasks', auth, async(req, res) => {
+  const queryObject = { owner: req.user._id };
+  if (req.query.completed) queryObject.completed = req.query.completed === 'true';
   try {
-    const tasks = await Task.find({ owner: req.user._id });
+    const tasks = await Task.find(queryObject);
     res.send(tasks);
   } catch (e) {
     res.status(500).send();
